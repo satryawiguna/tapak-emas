@@ -14,9 +14,9 @@ export default function ContactModal({ open, onClose }: Props) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const [status, setStatus] = useState<
-    "idle" | "sending" | "sent" | "error"
-  >("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   if (!open) return null;

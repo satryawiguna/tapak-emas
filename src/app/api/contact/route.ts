@@ -9,14 +9,14 @@ export async function POST(req: NextRequest) {
     const secretKey = process.env.RECAPTCHA_SECRET_KEY;
     const verifyRes = await fetch(
       `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaToken}`,
-      { method: "POST" }
+      { method: "POST" },
     );
     const verifyData = await verifyRes.json();
 
     if (!verifyData.success) {
       return NextResponse.json(
         { error: "CAPTCHA verification failed" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
     console.error("Contact form error:", error);
     return NextResponse.json(
       { error: "Failed to send message" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
