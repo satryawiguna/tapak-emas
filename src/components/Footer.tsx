@@ -11,7 +11,9 @@ export default function Footer() {
       <div className="max-w-[1440px] w-full flex flex-col md:flex-row justify-between items-center gap-12">
         {/* Brand */}
         <div className="flex flex-col items-center md:items-start">
-          <div className="text-headline-md text-primary mb-2">PT TAPAK MAS</div>
+          <div className="text-headline-md text-primary mb-2">
+            PT TAPAK EMAS
+          </div>
           <p className="text-label-md text-on-surface-variant font-semibold tracking-[0.05em] max-w-xs text-center md:text-left mb-6">
             Natural Resources &bull; Renewable Energy &bull; Art &amp; Luxury
             Assets
@@ -34,7 +36,7 @@ export default function Footer() {
             </div>
           </div>
           <p className="text-label-md text-xs text-on-surface-variant mt-8 opacity-50">
-            &copy; 2024 PT TAPAK MAS. All Rights Reserved.
+            &copy; 2024 PT TAPAK EMAS. All Rights Reserved.
           </p>
         </div>
 

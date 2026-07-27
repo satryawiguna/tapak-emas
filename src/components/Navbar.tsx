@@ -43,7 +43,7 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 w-full z-50 flex justify-between items-center section-px-desktop h-20 bg-surface border-b border-outline-variant/20 shadow-sm">
       <div className="text-headline-md font-bold text-primary tracking-tighter">
-        [ TAPAK MAS ]
+        [ TAPAK EMAS ]
       </div>
 
       <nav className="hidden lg:flex items-center gap-8">

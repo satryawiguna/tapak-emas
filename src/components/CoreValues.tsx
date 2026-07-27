@@ -39,7 +39,7 @@ export default function CoreValues() {
       <div className="max-w-[1440px] mx-auto">
         <div className="text-center mb-16">
           <span className="text-label-md text-primary font-semibold tracking-[0.2em] uppercase mb-4 block">
-            The PT TAPAK MAS Philosophy
+            The PT TAPAK EMAS Philosophy
           </span>
           <h2 className="text-headline-lg text-on-surface mb-8">
             Our Core Values

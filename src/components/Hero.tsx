@@ -29,7 +29,7 @@ export default function Hero() {
       className="relative h-screen flex items-center overflow-hidden pt-20"
     >
       {/* Slider background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-x-0 bottom-0 top-20 z-0">
         {slides.map((url, i) => (
           <div
             key={i}
@@ -51,14 +51,14 @@ export default function Hero() {
           </span>
         </div>
 
-        <h1 className="text-display-lg text-white mb-8 max-w-4xl leading-tight">
-          PT TAPAK MAS:
+        <h1 className="text-headline-lg-mobile md:text-display-lg text-white mb-6 md:mb-8 max-w-4xl">
+          PT TAPAK EMAS:
           <br />
           <span className="text-primary">Corporate Profile</span>
         </h1>
 
-        <p className="text-body-lg text-on-surface-variant mb-12 max-w-2xl">
-          Established in 2008, PT TAPAK MAS has grown into a diversified
+        <p className="text-body-md md:text-body-lg text-on-surface-variant mb-8 md:mb-12 max-w-2xl">
+          Established in 2008, PT TAPAK EMAS has grown into a diversified
           conglomerate with a strong presence across key industrial sectors. We
           are committed to excellence, innovation, and sustainable development
           in every venture we undertake.

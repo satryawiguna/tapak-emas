@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     });
 
     await transporter.sendMail({
-      from: `"PT Tapak Mas Website" <${process.env.SMTP_USER}>`,
+      from: `"PT Tapak Emas Website" <${process.env.SMTP_USER}>`,
       replyTo: email,
       to: "delia@tapakemas.com",
       subject: `Corporate Inquiry from ${name}`,

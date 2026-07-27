@@ -17,9 +17,9 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PT TAPAK MAS | Transforming Natural Resources into Enduring Value",
+  title: "PT TAPAK EMAS | Transforming Natural Resources into Enduring Value",
   description:
-    "PT TAPAK MAS has grown into a diversified conglomerate with a strong presence across key industrial sectors.",
+    "PT TAPAK EMAS has grown into a diversified conglomerate with a strong presence across key industrial sectors.",
 };
 
 export default function RootLayout({
