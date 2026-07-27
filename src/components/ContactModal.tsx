@@ -1,8 +1,12 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import { X, Send, Loader2 } from "lucide-react";
-import ReCAPTCHA from "react-google-recaptcha";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 interface Props {
   open: boolean;
@@ -13,38 +17,44 @@ export default function ContactModal({ open, onClose }: Props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaInput, setCaptchaInput] = useState("");
+  const [captchaError, setCaptchaError] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
   );
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  useEffect(() => {
+    if (open) {
+      loadCaptchaEnginge(6);
+      setCaptchaInput("");
+    }
+  }, [open]);
 
   if (!open) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!captchaToken) return;
+
+    if (!validateCaptcha(captchaInput)) {
+      setCaptchaError(true);
+      setCaptchaInput("");
+      return;
+    }
+    setCaptchaError(false);
 
     setStatus("sending");
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message, captchaToken }),
+        body: JSON.stringify({ name, email, message }),
       });
       if (!res.ok) throw new Error("Failed");
       setStatus("sent");
     } catch {
       setStatus("error");
-    } finally {
-      recaptchaRef.current?.reset();
-      setCaptchaToken(null);
     }
   };
-
-  const siteKey =
-    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ||
-    "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -130,18 +140,34 @@ export default function ContactModal({ open, onClose }: Props) {
               />
             </div>
 
-            <div className="flex justify-center">
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                sitekey={siteKey}
-                onChange={(token) => setCaptchaToken(token)}
-                theme="dark"
+            <div className="space-y-3">
+              <label className="text-label-md text-on-surface font-semibold block mb-1.5">
+                Security Check
+              </label>
+              <div className="flex justify-center bg-surface-container rounded-lg p-4 border border-outline-variant/30">
+                <LoadCanvasTemplate />
+              </div>
+              <input
+                type="text"
+                required
+                value={captchaInput}
+                onChange={(e) => {
+                  setCaptchaInput(e.target.value);
+                  setCaptchaError(false);
+                }}
+                className="w-full bg-surface-container border border-outline-variant/30 rounded-lg px-4 py-3 text-body-md text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-primary transition-colors"
+                placeholder="Enter captcha characters"
               />
+              {captchaError && (
+                <p className="text-red-400 text-sm text-center">
+                  Captcha does not match — try again
+                </p>
+              )}
             </div>
 
             <button
               type="submit"
-              disabled={!captchaToken || status === "sending"}
+              disabled={!captchaInput || status === "sending"}
               className="w-full bg-primary text-on-primary text-label-md font-semibold px-6 py-3 rounded-lg hover:bg-primary-container transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {status === "sending" ? (

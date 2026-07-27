@@ -3,22 +3,7 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, message, captchaToken } = await req.json();
-
-    // Verify reCAPTCHA
-    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-    const verifyRes = await fetch(
-      `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaToken}`,
-      { method: "POST" },
-    );
-    const verifyData = await verifyRes.json();
-
-    if (!verifyData.success) {
-      return NextResponse.json(
-        { error: "CAPTCHA verification failed" },
-        { status: 400 },
-      );
-    }
+    const { name, email, message } = await req.json();
 
     // Send email to delia@tapakemas.com
     const transporter = nodemailer.createTransport({
